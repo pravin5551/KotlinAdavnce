@@ -22,7 +22,7 @@ fun main() {
         println("Dummy work ends on ${Thread.currentThread().name} Coroutine1")
     }
 
-    Thread.sleep(2000)
+//    Thread.sleep(2000)
     println("Ends on ${Thread.currentThread().name} thread")
 
 }
