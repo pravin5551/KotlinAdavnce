@@ -22,14 +22,7 @@ fun main() {
         println("Dummy work ends on ${Thread.currentThread().name} Coroutine1")
     }
 
-    GlobalScope.launch {
-        println("Dummy work ends on ${Thread.currentThread().name} Coroutine2")
-        withContext(Dispatchers.IO) {
-            Thread.sleep(1000)
-        }
-        println("Dummy work ends on ${Thread.currentThread().name} Coroutine2")
-    }
-
+    Thread.sleep(2000)
     println("Ends on ${Thread.currentThread().name} thread")
 
 }
