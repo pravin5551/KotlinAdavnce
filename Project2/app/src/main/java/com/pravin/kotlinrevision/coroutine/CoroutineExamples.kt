@@ -1,7 +1,6 @@
 package com.pravin.kotlinrevision.coroutine
 
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 
 class CoroutineExamples {
 
@@ -10,10 +9,20 @@ class CoroutineExamples {
 fun main() = runBlocking {
 
     println("Start of program")
-    for (i in 0..10) {
+
+    val job: Job =  GlobalScope.async {
+        for (i in 0..10) {
+            println("Printing $i .")
+            delay(1000)
+        }
+    }
+
+
+    job.join()
+
+    for (i in 10..20) {
         println("Printing $i .")
         delay(1000)
     }
-
     println("End of program")
 }
