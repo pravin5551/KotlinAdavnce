@@ -3,7 +3,7 @@ package com.pravin.kotlinrevision.coroutine
 import kotlinx.coroutines.*
 
 
-@OptIn(DelicateCoroutinesApi::class)
+
 fun main() = runBlocking {
     println("Hi from kotlin")
 
