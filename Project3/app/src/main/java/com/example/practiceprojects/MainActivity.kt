@@ -4,41 +4,46 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.practiceprojects.databinding.ActivityMainBinding
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var recyclerView: RecyclerView
+    private lateinit var dataBinding: ActivityMainBinding
+
+    //    lateinit var recyclerView: RecyclerView
     lateinit var adapter: MyAdapter
-    var ediText: EditText? = null
-    var btnPressMe: Button? = null
-    var text: TextView? = null
+
+    //    var ediText: EditText? = null
+//    var btnPressMe: Button? = null
+//    var text: TextView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+//        setContentView(R.layout.activity_main)
+        dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         val dexOutputDir: File = codeCacheDir
         dexOutputDir.setReadOnly()
 
 
-        ediText = findViewById(R.id.ediText)
-        btnPressMe = findViewById(R.id.btnPressMe)
-        text = findViewById(R.id.textView)
+//        ediText = findViewById(R.id.ediText)
+//        btnPressMe = findViewById(R.id.btnPressMe)
+//        text = findViewById(R.id.textView)
 
-        btnPressMe?.setOnClickListener {
-            var str: String = ediText?.text.toString()
-            storeSharePrefData(str)
-            desplayPrefData()
+        dataBinding.apply {
+            btnPressMe?.setOnClickListener {
+                val str: String = ediText?.text.toString()
+                storeSharePrefData(str)
+                displayPrefData()
+            }
         }
 
 
         //1- create instances
-        recyclerView = findViewById(R.id.RvVaccines)
-        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        dataBinding.rvVaccines.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
 
         //2- creating the list
@@ -55,18 +60,18 @@ class MainActivity : AppCompatActivity() {
 
         //3- adapter
         adapter = MyAdapter(vaccineList)
-        recyclerView.adapter = adapter
+        dataBinding.rvVaccines.adapter = adapter
 
     }
 
-    private fun desplayPrefData() {
+    private fun displayPrefData() {
         val sharePref: SharedPreferences = baseContext.getSharedPreferences(
             "mySharePref",
             Context.MODE_PRIVATE
         )
         var str = sharePref.getString("ediTextData", "No data")
 
-        text?.text = str.toString()
+        dataBinding.textView?.text = str.toString()
     }
 
     private fun storeSharePrefData(str: String) {

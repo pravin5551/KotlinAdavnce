@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.practiceprojects.databinding.ActivityMainBinding
 
 class MyAdapter(val vaccinesList: ArrayList<VaccineModel>) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>()  {
