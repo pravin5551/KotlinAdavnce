@@ -15,13 +15,25 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: MyAdapter
-
+    var ediText: EditText? = null
+    var btnPressMe: Button? = null
+    var text: TextView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val dexOutputDir: File = codeCacheDir
         dexOutputDir.setReadOnly()
 
+
+        ediText = findViewById(R.id.ediText)
+        btnPressMe = findViewById(R.id.btnPressMe)
+        text = findViewById(R.id.textView)
+
+        btnPressMe?.setOnClickListener {
+            var str: String = ediText?.text.toString()
+            storeSharePrefData(str)
+            desplayPrefData()
+        }
 
 
         //1- create instances
@@ -47,5 +59,22 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun desplayPrefData() {
+        val sharePref: SharedPreferences = baseContext.getSharedPreferences(
+            "mySharePref",
+            Context.MODE_PRIVATE
+        )
+        var str = sharePref.getString("ediTextData", "No data")
 
+        text?.text = str.toString()
+    }
+
+    private fun storeSharePrefData(str: String) {
+        val sharePref = baseContext.getSharedPreferences("mySharePref", Context.MODE_PRIVATE)
+
+        val editor = sharePref.edit()
+
+        editor.putString("ediTextData", str)
+        editor.apply()
+    }
 }
