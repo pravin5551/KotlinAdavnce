@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         //viewmodelfactory object
-        factory = MainActivityViewModelFactory(10)
+        factory = MainActivityViewModelFactory(1234)
 
         //viewmodel object
         viewModel = ViewModelProvider(this, factory)[MainActivityViewModel::class.java]
@@ -41,9 +41,10 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        }
 
+        binding.lifecycleOwner = this
         binding.myViewModel = viewModel
-        viewModel.counter.observe(this, Observer {
-            binding.increasedText.text = it.toString()
-        })
+//        viewModel.counter.observe(this, Observer {
+//            binding.increasedText.text = it.toString()
+//        })
     }
 }
