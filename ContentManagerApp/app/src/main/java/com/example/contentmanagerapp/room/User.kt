@@ -5,15 +5,15 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 
-@Entity(tableName = "UserData")
+@Entity(tableName = "user_data")
 data class User(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "user_id")
     val user_id: Int,
 
     @ColumnInfo(name = "user_name")
-    val user_name : String,
+    var user_name : String,
 
     @ColumnInfo(name = "user_email")
-    val user_email: String
+    var user_email: String
 )

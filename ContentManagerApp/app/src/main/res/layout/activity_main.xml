@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="userVM"
+            type="com.example.contentmanagerapp.viewmodel.UserViewModel" />
+    </data>
+
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,6 +22,7 @@
         android:layout_marginTop="48dp"
         android:layout_marginEnd="36dp"
         android:hint="Enter Name"
+        android:text="@={userVM.inputeName}"
         app:layout_constraintBottom_toTopOf="@+id/editEdTextEmailText"
         app:layout_constraintEnd_toStartOf="@+id/btnName"
         app:layout_constraintHorizontal_bias="0.0"
@@ -31,7 +38,8 @@
         android:layout_marginTop="48dp"
         android:layout_marginEnd="36dp"
         android:hint="Enter Email"
-        app:layout_constraintEnd_toStartOf="@+id/btnEmail"
+        android:text="@={userVM.inputeEmail}"
+        app:layout_constraintEnd_toStartOf="@+id/btnDelete"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
 
@@ -43,27 +51,30 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="36dp"
-        android:text="Name Click"
+        android:text="@{userVM.saveOrUpdateBtnTxt}"
+        android:onClick="@{()->userVM.saveOrUpdateUser()}"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnEmail"
+        android:id="@+id/btnDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="36dp"
-        android:text="Email Click"
+        android:text="@{userVM.clearAllOrDeleteBtnTxt}"
+        android:onClick="@{()->userVM.clearAllOrDeleteAll()}"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnName" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="537dp"
         tools:layout_editor_absoluteX="1dp"
         app:flow_horizontalAlign="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnEmail"
+        app:layout_constraintTop_toBottomOf="@id/btnDelete"
         tools:layout_editor_absoluteY="193dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
