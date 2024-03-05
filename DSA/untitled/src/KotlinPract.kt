@@ -1,9 +1,8 @@
-class KotlinPract {
-    fun doSomething(){
-        println("Hello")
-    }
-
-
+class KotlinPract : Student("Pravin") {
+//    override fun doSomething(){
+//        super.doSomething()
+//        println("Hello")
+//    }
 }
 
 fun main() {
